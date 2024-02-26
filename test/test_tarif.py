@@ -26,7 +26,9 @@ def test_adulte_parisien():
     y=calcul.tarif(24,False)
     assert y == 1.5
 
-def test_adulte_touriste():
+def test_adulte_touriste(mocker):
+    mocker.patch ('calcul_tarif.calcul_tarif.get', return_value = 1.4)
     calcul = calcul_tarif()
     y=calcul.tarif(24,True)
+    calcul_tarif.get.assert_called_once_with()
     assert y == 3.0
