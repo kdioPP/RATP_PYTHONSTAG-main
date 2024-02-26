@@ -40,3 +40,16 @@ def test_adulte_touriste_limite(mocker):
     y=calcul.tarif(10,True)
     calcul_tarif.get.assert_called_once_with()
     assert y == 2.8
+
+
+@pytest.mark.parametrize( 'age, tourist, tarif_attendu', [
+
+    (20, True, 3.0),
+    (7, True, 1.5),
+    (7, False, 0.75),
+])
+
+def test_tarif(age, tourist, tarif_attendu):
+    calcul = calcul_tarif()
+    y=calcul.tarif(age,tourist)
+    assert y == tarif_attendu
