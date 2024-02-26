@@ -31,4 +31,12 @@ def test_adulte_touriste(mocker):
     calcul = calcul_tarif()
     y=calcul.tarif(24,True)
     calcul_tarif.get.assert_called_once_with()
-    assert y == 3.0
+    assert y == 2.8
+
+
+def test_adulte_touriste_limite(mocker):
+    mocker.patch ('calcul_tarif.calcul_tarif.get', return_value = 1.4)
+    calcul = calcul_tarif()
+    y=calcul.tarif(10,True)
+    calcul_tarif.get.assert_called_once_with()
+    assert y == 2.8
